@@ -1,0 +1,666 @@
+[
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column production_start using expression grel:value.toDate(\"MMM/yyyy\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "production_start",
+    "expression": "grel:value.toDate(\"MMM/yyyy\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column discovery_date using expression grel:value.toDate(\"yyyy/MM\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "discovery_date",
+    "expression": "grel:value.toDate(\"yyyy/MM\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column water_depth using expression grel:value * 0.3048",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "depth_unit",
+          "omitBlank": false,
+          "columnName": "depth_unit",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "FEET",
+                "l": "FEET"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "water_depth",
+    "expression": "grel:value * 0.3048",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column depth_unit using expression grel:\"METRES\"",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "depth_unit",
+          "omitBlank": false,
+          "columnName": "depth_unit",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "FEET",
+                "l": "FEET"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "record-based"
+    },
+    "columnName": "depth_unit",
+    "expression": "grel:\"METRES\"",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/field/\"+value.escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field",
+              "curie": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/production_start",
+              "curie": "deccprop:production_start",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "columnName": "production_start"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/field_type",
+              "curie": "deccprop:field_type",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "field_type"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/field_status",
+              "curie": "deccprop:field_status",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "field_status"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/license",
+              "curie": "deccprop:license",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "license"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/discovery_well",
+              "curie": "deccprop:discovery_well",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "discovery_well"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/uk_quadrant_block",
+              "curie": "deccprop:uk_quadrant_block",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "uk_quadrant_block"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/name",
+              "curie": "deccprop:name",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "name"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/operator",
+              "curie": "deccprop:operator",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "operator"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/water_depth",
+              "curie": "deccprop:water_depth",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "water_depth"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/offshore_onshore",
+              "curie": "deccprop:offshore_onshore",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "offshore_onshore"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/discovery_date",
+              "curie": "deccprop:discovery_date",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "columnName": "discovery_date"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/depth_unit",
+              "curie": "deccprop:depth_unit",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "depth_unit"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "name"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column production_start using expression grel:value.toString(\"YYYY-MM-dd\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "production_start",
+    "expression": "grel:value.toString(\"YYYY-MM-dd\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column discovery_date using expression grel:value.toString(\"YYYY-MM-dd\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "record-based"
+    },
+    "columnName": "discovery_date",
+    "expression": "grel:value.toString(\"YYYY-MM-dd\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field",
+              "curie": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/production_start",
+              "curie": "deccprop:production_start",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "columnName": "production_start"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/field_type",
+              "curie": "deccprop:field_type",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "field_type"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/field_status",
+              "curie": "deccprop:field_status",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "field_status"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/license",
+              "curie": "deccprop:license",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "license"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/discovery_well",
+              "curie": "deccprop:discovery_well",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "discovery_well"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/uk_quadrant_block",
+              "curie": "deccprop:uk_quadrant_block",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "uk_quadrant_block"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/name",
+              "curie": "deccprop:name",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "name"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/operator",
+              "curie": "deccprop:operator",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "operator"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/water_depth",
+              "curie": "deccprop:water_depth",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "water_depth"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/offshore_onshore",
+              "curie": "deccprop:offshore_onshore",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "offshore_onshore"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/discovery_date",
+              "curie": "deccprop:discovery_date",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "columnName": "discovery_date"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/depth_unit",
+              "curie": "deccprop:depth_unit",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "depth_unit"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "name"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.replace(\" \", \"_\").escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field",
+              "curie": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/production_start",
+              "curie": "deccprop:production_start",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "columnName": "production_start"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/field_type",
+              "curie": "deccprop:field_type",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "field_type"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/field_status",
+              "curie": "deccprop:field_status",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "field_status"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/license",
+              "curie": "deccprop:license",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "license"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/discovery_well",
+              "curie": "deccprop:discovery_well",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "discovery_well"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/uk_quadrant_block",
+              "curie": "deccprop:uk_quadrant_block",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "uk_quadrant_block"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/name",
+              "curie": "deccprop:name",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "name"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/operator",
+              "curie": "deccprop:operator",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "operator"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/water_depth",
+              "curie": "deccprop:water_depth",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "water_depth"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/offshore_onshore",
+              "curie": "deccprop:offshore_onshore",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "offshore_onshore"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/discovery_date",
+              "curie": "deccprop:discovery_date",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "columnName": "discovery_date"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/depth_unit",
+              "curie": "deccprop:depth_unit",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "depth_unit"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "name"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

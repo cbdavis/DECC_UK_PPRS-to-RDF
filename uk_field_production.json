@@ -1,0 +1,430 @@
+[
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column value using expression grel:value.replace(\",\", \"\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "value",
+    "expression": "grel:value.replace(\",\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column value using expression value.toNumber()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "value",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column value",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "value",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          " "
+        ],
+        "to": "0"
+      }
+    ]
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column value using expression value.toNumber()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "value",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column date using expression grel:value.toDate('yyyy/M')",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "date",
+    "expression": "grel:value.toDate('yyyy/M')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://localhost:3333/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/production",
+              "curie": "deccprop:production",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "product"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/date",
+              "curie": "deccprop:date",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "columnName": "date"
+              }
+            },
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/value",
+              "curie": "deccprop:value",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                "columnName": "value"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://localhost:3333/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/production",
+              "curie": "deccprop:production",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+cells[\"name\"].value.escape('url')+\"/ProductionInfo/\"+cells[\"date\"].value.toString('yyyy-MM')",
+                "isRowNumberCell": false,
+                "columnName": "product",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/product",
+                    "curie": "deccprop:product",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "product"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/date",
+                    "curie": "deccprop:date",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                      "columnName": "date"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/value",
+                    "curie": "deccprop:value",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                      "columnName": "value"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column date using expression grel:value.toString(\"YYYY-MM-dd\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "date",
+    "expression": "grel:value.toString(\"YYYY-MM-dd\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://localhost:3333/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/production",
+              "curie": "deccprop:production",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+cells[\"name\"].value.escape('url')+\"/ProductionInfo/\"+cells[\"date\"].value.toString('yyyy-MM')",
+                "isRowNumberCell": false,
+                "columnName": "product",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/product",
+                    "curie": "deccprop:product",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "product"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/date",
+                    "curie": "deccprop:date",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                      "columnName": "date"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/value",
+                    "curie": "deccprop:value",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                      "columnName": "value"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://localhost:3333/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.replace(\" \",\"_\").escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/production",
+              "curie": "deccprop:production",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+cells[\"name\"].value.replace(\" \",\"_\").escape('url')+\"/ProductionInfo/\"+cells[\"date\"].value.toString('yyyy-MM')",
+                "isRowNumberCell": false,
+                "columnName": "product",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/product",
+                    "curie": "deccprop:product",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "product"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/date",
+                    "curie": "deccprop:date",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                      "columnName": "date"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/value",
+                    "curie": "deccprop:value",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                      "columnName": "value"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

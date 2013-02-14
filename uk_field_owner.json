@@ -1,0 +1,158 @@
+[
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/ownership",
+              "curie": "deccprop:ownership",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.escape('url')+\"/OwnershipInfo/\"+cells[\"owner\"].value.escape('url')",
+                "isRowNumberCell": false,
+                "columnName": "name",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/owner",
+                    "curie": "deccprop:owner",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "owner"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/share",
+                    "curie": "deccprop:share",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                      "columnName": "share"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "deccprop",
+          "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.replace(\" \", \"_\").escape('url')",
+          "isRowNumberCell": false,
+          "columnName": "name",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/ownership",
+              "curie": "deccprop:ownership",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "\"http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Resource/Field/\"+value.replace(\" \", \"_\").escape('url')+\"/OwnershipInfo/\"+cells[\"owner\"].value.replace(\" \", \"_\").escape('url')",
+                "isRowNumberCell": false,
+                "columnName": "name",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/owner",
+                    "curie": "deccprop:owner",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "owner"
+                    }
+                  },
+                  {
+                    "uri": "http://enipedia.tudelft.nl/data/DECC_UK_PPRS/Property/share",
+                    "curie": "deccprop:share",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "valueType": "http://www.w3.org/2001/XMLSchema#double",
+                      "columnName": "share"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
